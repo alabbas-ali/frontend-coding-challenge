@@ -1,3 +1,4 @@
+import { emptySpeakersList } from '../model/empty-speakers'
 import { Speaker } from '../model/speaker'
 
 export interface SpeakersState {
@@ -7,7 +8,7 @@ export interface SpeakersState {
 }
 
 export const SpeakersInitialState: SpeakersState = {
-    list: [],
+    list: emptySpeakersList,
     loading: true,
     error: null
 }

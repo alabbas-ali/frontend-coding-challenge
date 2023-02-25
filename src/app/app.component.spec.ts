@@ -4,7 +4,7 @@ import { AppComponent } from './app.component'
 
 describe('AppComponent', () => {
     beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+        void TestBed.configureTestingModule({
             imports: [RouterTestingModule],
             declarations: [AppComponent]
         }).compileComponents()

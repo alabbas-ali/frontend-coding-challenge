@@ -53,9 +53,9 @@ export const emptySpeakersList: Array<Speaker> = [
             value: '260599513'
         },
         picture: {
-            large: 'https://randomuser.me/api/portraits/men/26.jpg',
-            medium: 'https://randomuser.me/api/portraits/med/men/26.jpg',
-            thumbnail: 'https://randomuser.me/api/portraits/thumb/men/26.jpg'
+            large: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg',
+            medium: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg',
+            thumbnail: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg'
         },
         nat: Countries.Australia
     },
@@ -109,9 +109,9 @@ export const emptySpeakersList: Array<Speaker> = [
             value: '260599513'
         },
         picture: {
-            large: 'https://randomuser.me/api/portraits/men/26.jpg',
-            medium: 'https://randomuser.me/api/portraits/med/men/26.jpg',
-            thumbnail: 'https://randomuser.me/api/portraits/thumb/men/26.jpg'
+            large: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg',
+            medium: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg',
+            thumbnail: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg'
         },
         nat: Countries.Australia
     },
@@ -165,9 +165,9 @@ export const emptySpeakersList: Array<Speaker> = [
             value: '260599513'
         },
         picture: {
-            large: 'https://randomuser.me/api/portraits/men/26.jpg',
-            medium: 'https://randomuser.me/api/portraits/med/men/26.jpg',
-            thumbnail: 'https://randomuser.me/api/portraits/thumb/men/26.jpg'
+            large: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg',
+            medium: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg',
+            thumbnail: 'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg'
         },
         nat: Countries.Australia
     }

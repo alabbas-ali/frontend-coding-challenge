@@ -6,6 +6,7 @@ import {
 
 import { SpeakerService } from './speaker.service'
 import { Speaker } from '../model/speaker'
+import { emptySpeakersList } from '../model/empty-speakers'
 
 describe('SpeakerService', () => {
     let injector: TestBed
@@ -31,38 +32,16 @@ describe('SpeakerService', () => {
         expect(service).toBeTruthy()
     })
 
-    describe('#getAll', () => {
+    describe('#getSpeakers', () => {
         it('should return an Observable<Array<Speakers>>', () => {
-            const dummySpeakers: Array<Speaker> = [
-                {
-                    id: '',
-                    speaker_name: '..',
-                    speaker_salary: 0.0,
-                    speaker_age: 0,
-                    profile_image: '/assets/loading_profile.gif'
-                },
-                {
-                    id: '',
-                    speaker_name: '..',
-                    speaker_salary: 0.0,
-                    speaker_age: 0,
-                    profile_image: '/assets/loading_profile.gif'
-                },
-                {
-                    id: '',
-                    speaker_name: '..',
-                    speaker_salary: 0.0,
-                    speaker_age: 0,
-                    profile_image: '/assets/loading_profile.gif'
-                }
-            ]
+            const dummySpeakers: Array<Speaker> = emptySpeakersList
 
-            service.getAll().subscribe((speakers) => {
+            service.getSpeakers(1, 3).subscribe((speakers) => {
                 expect(speakers.length).toBe(3)
                 expect(speakers).toEqual(dummySpeakers)
             })
 
-            const req = httpMock.expectOne('/api/v1/speakers')
+            const req = httpMock.expectOne('/api/?page=1&results=3')
             expect(req.request.method).toBe('GET')
             req.flush(dummySpeakers)
         })

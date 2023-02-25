@@ -4,21 +4,19 @@ import { Component, OnInit } from '@angular/core'
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Store } from '@ngrx/store'
 import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md'
-import { take } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 
 import { ConfirmModalComponent } from '@@shared/components/confirm-modal/confirm-modal.component'
 
 import { Speaker } from '../../model/speaker'
 import {
-    getAllLoaded,
+    getLoaded,
     getSpeakers,
     getError
 } from '../../store/speakers.selectors'
 import * as fromSpeakers from '../../store/speakers.actions'
 import { SpeakerModalComponent } from '../../components/speaker-modal/speaker-modal.component'
 import { SpeakersState } from '../../store/speakers.state'
-import { emptySpeakersList } from '../../model/empty-speakers'
 
 @Component({
     selector: 'app-speakers',
@@ -33,11 +31,9 @@ import { emptySpeakersList } from '../../model/empty-speakers'
     ]
 })
 export class SpeakersComponent implements OnInit {
-    speakers$!: Observable<Array<Speaker> | null>
-    loading = true
+    speakers$: Observable<Array<Speaker>> = this.store.select(getSpeakers)
+    loading$: Observable<boolean> = this.store.select(getLoaded)
     modalRef!: MDBModalRef
-
-    emptyState = emptySpeakersList
 
     constructor(
         private store: Store<SpeakersState>,
@@ -46,12 +42,6 @@ export class SpeakersComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new fromSpeakers.SpeakersQuery())
-
-        this.store.select(getAllLoaded).subscribe((loading) => {
-            if (this.loading !== loading) {
-                this.loading = loading
-            }
-        })
 
         this.store.select(getError).subscribe((error) => {
             if (error) {
@@ -62,8 +52,6 @@ export class SpeakersComponent implements OnInit {
                 this.modalRef.content.content = error
             }
         })
-
-        this.speakers$ = this.store.select(getSpeakers)
     }
 
     openViewSpeakerModal(speaker: Speaker) {
@@ -72,13 +60,6 @@ export class SpeakersComponent implements OnInit {
         })
         this.modalRef.content.heading = 'Edit Speaker'
         this.modalRef.content.speaker = { ...speaker }
-        this.modalRef.content.speakerData
-            .pipe(take(1))
-            .subscribe((speakerData: Speaker) => {
-                this.store.dispatch(
-                    new fromSpeakers.SpeakerSave({ speaker: speakerData })
-                )
-            })
     }
 
     onSpeakerView(emplyee: Speaker) {
