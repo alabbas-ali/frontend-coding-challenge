@@ -1,0 +1,33 @@
+<app-layout>
+    <section id="cards" class="text-center">
+        <!--Section heading-->
+        <h3 class="section-heading mb-5 h1 mt-0">Speakers</h3>
+
+        <!--Show an empty list of speakers as loading effects with animation untill the acctual data gets loaded-->
+        <div *ngIf="loading" [@inOutAnimation] class="row">
+            <div
+                *ngFor="let speaker of emptyState"
+                class="col-md-6 col-lg-4 mb-5"
+            >
+                <speaker-card [speaker]="speaker"></speaker-card>
+            </div>
+
+            <div class="col-md-12">
+                <img src="/assets/loading.gif" alt="" />
+            </div>
+        </div>
+
+        <!-- Display the speakers list -->
+        <div *ngIf="!loading" [@inOutAnimation] class="row">
+            <div
+                *ngFor="let speaker of speakers$ | async"
+                class="col-md-6 col-lg-4 mb-5"
+            >
+                <speaker-card
+                    [speaker]="speaker"
+                    (view)="onSpeakerView($event)"
+                ></speaker-card>
+            </div>
+        </div>
+    </section>
+</app-layout>

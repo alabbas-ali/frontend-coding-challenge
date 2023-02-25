@@ -18,18 +18,18 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () =>
-            import('./employee/employee.module').then((a) => a.EmployeeModule)
+            import('./speakers/speakers.module').then((a) => a.SpeakersModule)
     },
     {
         path: 'about',
-        loadChildren: () =>
-            import('./about/about.module').then((a) => a.AboutModule)
+        loadComponent: () =>
+            import('./about/about.component').then((a) => a.AboutComponent)
     },
     {
         path: '**',
         loadChildren: () =>
-            import('./page-not-found/page-not-found.module').then(
-                (a) => a.PageNotFoundModule
+            import('./page-not-found/page-not-found.component').then(
+                (a) => a.PageNotFoundComponent
             )
     }
 ]
