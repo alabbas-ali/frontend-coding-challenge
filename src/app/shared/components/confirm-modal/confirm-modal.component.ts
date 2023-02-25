@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { MDBModalRef } from 'angular-bootstrap-md'
 import { Subject } from 'rxjs'
 
 @Component({
@@ -13,10 +12,9 @@ export class ConfirmModalComponent {
     heading!: string
     content!: string
 
-    constructor(public modalRef: MDBModalRef) {}
+    constructor() {}
 
     onContirm() {
         this.confirmation.next(true)
-        this.modalRef.hide()
     }
 }

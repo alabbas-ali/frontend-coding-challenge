@@ -3,42 +3,50 @@ import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 
-import {
-    ButtonsModule,
-    InputsModule,
-    CardsModule,
-    InputUtilitiesModule,
-    IconsModule,
-    ModalModule,
-    WavesModule,
-    DropdownModule,
-    NavbarModule
-} from 'angular-bootstrap-md'
+import { MatButtonModule } from '@angular/material/button'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatInputModule } from '@angular/material/input'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatIconModule } from '@angular/material/icon'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatCardModule } from '@angular/material/card'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatDividerModule } from '@angular/material/divider'
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component'
 
-const BootstrapModules = [
-    ButtonsModule,
-    InputsModule,
-    CardsModule,
-    InputUtilitiesModule,
-    IconsModule,
-    ModalModule,
-    WavesModule,
-    NavbarModule,
-    DropdownModule
+const MatModules = [
+    // Material modules
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatIconModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatToolbarModule
 ]
 
 @NgModule({
     declarations: [ConfirmModalComponent],
-    imports: [CommonModule, FormsModule, HttpClientModule, BootstrapModules],
+    imports: [
+        CommonModule, //
+        FormsModule,
+        HttpClientModule,
+        MatModules
+    ],
     exports: [
         ConfirmModalComponent,
         CommonModule,
         FormsModule,
         HttpClientModule,
 
-        BootstrapModules
+        MatModules
     ],
     providers: [],
     entryComponents: []

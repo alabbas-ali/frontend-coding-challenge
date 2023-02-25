@@ -1,5 +1,4 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing'
-import { MDBModalRef } from 'angular-bootstrap-md'
 
 import { SpeakerModalComponent } from './speaker-modal.component'
 
@@ -10,7 +9,7 @@ describe('SpeakerModalComponent', () => {
     beforeEach(waitForAsync(() => {
         void TestBed.configureTestingModule({
             declarations: [SpeakerModalComponent],
-            providers: [MDBModalRef]
+            providers: []
         }).compileComponents()
     }))
 

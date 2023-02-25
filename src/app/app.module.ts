@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { ModalModule } from 'angular-bootstrap-md'
 
 import { SharedModule } from '@@shared/shared.module'
 
@@ -39,7 +38,6 @@ const routes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        ModalModule.forRoot(),
         StoreModule.forRoot(reducers, {
             runtimeChecks: {
                 strictStateImmutability: true,

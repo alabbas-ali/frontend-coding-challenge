@@ -3,10 +3,7 @@
 import { Component, OnInit } from '@angular/core'
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Store } from '@ngrx/store'
-import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md'
 import { Observable } from 'rxjs'
-
-import { ConfirmModalComponent } from '@@shared/components/confirm-modal/confirm-modal.component'
 
 import { Speaker } from '../../model/speaker'
 import {
@@ -15,7 +12,7 @@ import {
     getError
 } from '../../store/speakers.selectors'
 import * as fromSpeakers from '../../store/speakers.actions'
-import { SpeakerModalComponent } from '../../components/speaker-modal/speaker-modal.component'
+
 import { SpeakersState } from '../../store/speakers.state'
 
 @Component({
@@ -33,33 +30,20 @@ import { SpeakersState } from '../../store/speakers.state'
 export class SpeakersComponent implements OnInit {
     speakers$: Observable<Array<Speaker>> = this.store.select(getSpeakers)
     loading$: Observable<boolean> = this.store.select(getLoaded)
-    modalRef!: MDBModalRef
 
-    constructor(
-        private store: Store<SpeakersState>,
-        private modalService: MDBModalService
-    ) {}
+    constructor(private store: Store<SpeakersState>) {}
 
     ngOnInit() {
         this.store.dispatch(new fromSpeakers.SpeakersQuery())
 
         this.store.select(getError).subscribe((error) => {
             if (error) {
-                this.modalRef = this.modalService.show(ConfirmModalComponent, {
-                    class: 'modal-dialog modal-notify modal-danger modal-side modal-top-right'
-                })
-                this.modalRef.content.heading = 'Error happen'
-                this.modalRef.content.content = error
             }
         })
     }
 
     openViewSpeakerModal(speaker: Speaker) {
-        this.modalRef = this.modalService.show(SpeakerModalComponent, {
-            class: 'modal-full-height modal-right modal-notify modal-info'
-        })
-        this.modalRef.content.heading = 'Edit Speaker'
-        this.modalRef.content.speaker = { ...speaker }
+        console.log(speaker)
     }
 
     onSpeakerView(emplyee: Speaker) {
