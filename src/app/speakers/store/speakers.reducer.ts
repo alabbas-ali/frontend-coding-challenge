@@ -15,7 +15,7 @@ export const speakersReducer = (
 
             case SpeakersActionTypes.SPEAKERS_LOADED: {
                 return Object.assign({}, state, {
-                    list: action.payload.list,
+                    list: action.list,
                     loading: false
                 })
             }
@@ -24,7 +24,7 @@ export const speakersReducer = (
                 return Object.assign({}, state, {
                     loading: false,
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    error: action.payload.error
+                    error: action.error
                 })
             }
 

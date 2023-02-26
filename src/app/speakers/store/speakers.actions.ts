@@ -9,18 +9,20 @@ export enum SpeakersActionTypes {
 
 export class SpeakersQuery implements Action {
     readonly type = SpeakersActionTypes.SPEAKERS_LOAD
+
+    constructor(public page: number, public pageSize: number) {}
 }
 
 export class SpeakersLoaded implements Action {
     readonly type = SpeakersActionTypes.SPEAKERS_LOADED
 
-    constructor(public payload: { list: Array<Speaker> }) {}
+    constructor(public list: Array<Speaker>) {}
 }
 
 export class SpeakersError implements Action {
     readonly type = SpeakersActionTypes.SPEAKERS_ERROR
 
-    constructor(public payload: { error: any }) {}
+    constructor(public error: string) {}
 }
 
 export type SpeakersActions = SpeakersQuery | SpeakersLoaded | SpeakersError

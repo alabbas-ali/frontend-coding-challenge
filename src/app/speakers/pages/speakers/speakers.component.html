@@ -1,23 +1,62 @@
 <app-layout>
-    <section id="cards" class="text-center">
+    <section class="container mx-auto">
+        <div class="loading" *ngIf="loading$ | async">
+            <span class="loader"></span>
+        </div>
+
         <!--Section heading-->
-        <h3 class="section-heading mb-5 h1 mt-0">Speakers</h3>
+        <h3>Speakers</h3>
+
+        <div class="flex">
+            <mat-form-field>
+                <mat-label>Search</mat-label>
+                <input
+                    matInput
+                    type="text"
+                    placeholder="Search"
+                    [(ngModel)]="searchText"
+                />
+            </mat-form-field>
+
+            <mat-paginator
+                class="flex-grow"
+                (page)="onPaginateChange($event)"
+                [length]="1000"
+                [pageSize]="pageSize"
+                [showFirstLastButtons]="showFirstLastButtons"
+                [pageSizeOptions]="pageSizeOptions"
+                [pageIndex]="pageIndex"
+                aria-label="Select page"
+            >
+            </mat-paginator>
+        </div>
 
         <!-- Display the speakers list -->
-        <div [@inOutAnimation] class="row">
+        <div
+            [@inOutAnimation]
+            class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+        >
             <div
-                *ngFor="let speaker of speakers$ | async"
-                class="col-md-6 col-lg-4 mb-5"
+                *ngFor="
+                    let speaker of speakers$ | async | searchFilter : searchText
+                "
             >
                 <speaker-card
                     [speaker]="speaker"
                     (view)="onSpeakerView($event)"
                 ></speaker-card>
             </div>
-
-            <div class="col-md-12" *ngIf="loading$ | async">
-                <img src="/assets/loading.gif" alt="" />
-            </div>
         </div>
+
+        <mat-paginator
+            (page)="onPaginateChange($event)"
+            [length]="1000"
+            [pageSize]="pageSize"
+            [showFirstLastButtons]="showFirstLastButtons"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageIndex]="pageIndex"
+            aria-label="Select page"
+        >
+        </mat-paginator>
     </section>
 </app-layout>

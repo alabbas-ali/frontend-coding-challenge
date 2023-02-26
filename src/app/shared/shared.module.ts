@@ -16,6 +16,7 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatToolbarModule } from '@angular/material/toolbar'
 
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component'
+import { SearchPipe } from './pips/search.pipe'
 
 const MatModules = [
     // Material modules
@@ -32,21 +33,30 @@ const MatModules = [
     MatToolbarModule
 ]
 
+const SharedComponents = [ConfirmModalComponent]
+
+const SharedPips = [SearchPipe]
+
 @NgModule({
-    declarations: [ConfirmModalComponent],
+    declarations: [
+        SharedComponents, //
+        SharedPips
+    ],
     imports: [
         CommonModule, //
         FormsModule,
         HttpClientModule,
+
         MatModules
     ],
     exports: [
-        ConfirmModalComponent,
         CommonModule,
         FormsModule,
         HttpClientModule,
 
-        MatModules
+        MatModules,
+        SharedComponents,
+        SharedPips
     ],
     providers: [],
     entryComponents: []

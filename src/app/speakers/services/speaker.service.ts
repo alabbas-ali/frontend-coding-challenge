@@ -27,12 +27,12 @@ export class SpeakerService {
         if (page) {
             queryParameters = queryParameters.set('page', page.toString())
         } else {
-            queryParameters = queryParameters.set('page', '1')
+            queryParameters = queryParameters.set('page', '0')
         }
         if (results) {
             queryParameters = queryParameters.set('results', results.toString())
         } else {
-            queryParameters = queryParameters.set('results', '10')
+            queryParameters = queryParameters.set('results', '9')
         }
         return this.httpClient
             .get<SpeakerPage>(`${this.api}/`, {

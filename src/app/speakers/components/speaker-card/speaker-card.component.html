@@ -1,42 +1,33 @@
 <mat-card>
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div
+            mat-card-avatar
+            [ngStyle]="{
+                'background-image': 'url(' + speaker.picture.thumbnail + ')'
+            }"
+        ></div>
         <mat-card-title>
             {{ speaker.name.title }}
             {{ speaker.name.first }}
             {{ speaker.name.last }}
         </mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        <mat-card-subtitle>
+            <strong>{{ speaker.email }}</strong>
+        </mat-card-subtitle>
     </mat-card-header>
     <!--Card image-->
-    <img
+    <!-- <img
         mat-card-image
-        src="{{
-            speaker.picture.medium ||
-                'https://mdbcdn.b-cdn.net/img/Photos/Others/photo6.jpg'
-        }}"
+        src="{{ speaker.picture.large }}"
         alt="{{ speaker.name.title }} 
         {{ speaker.name.first }} 
         {{ speaker.name.last }}"
-    />
+    /> -->
 
     <!--Card content-->
     <mat-card-content>
-        <!--Title-->
         <div>
-            <h4>
-                {{ speaker.name.title }}
-                {{ speaker.name.first }}
-                {{ speaker.name.last }}
-            </h4>
-        </div>
-
-        <!--Text-->
-        <div>
-            <h5 class="blue-text pb-2">
-                <strong>{{ speaker.email }}</strong>
-            </h5>
-            <p class="card-text">{{ speaker.location.city }}</p>
+            <p>Location: {{ speaker.location.city }}</p>
         </div>
     </mat-card-content>
     <mat-card-actions>

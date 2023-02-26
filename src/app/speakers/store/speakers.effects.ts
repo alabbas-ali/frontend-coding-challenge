@@ -15,21 +15,23 @@ export class SpeakersEffects {
     query$ = createEffect(() =>
         this.actions$.pipe(
             ofType(SpeakersActionTypes.SPEAKERS_LOAD),
-            mergeMap(() =>
-                this.speakerService.getSpeakers().pipe(
-                    map(
-                        (speakers) =>
-                            new fromSpeakers.SpeakersLoaded({ list: speakers })
-                    ),
-                    catchError((error) => {
-                        this.store.dispatch(
-                            new fromSpeakers.SpeakersError({
-                                error: `Error in retrieving Speakers ${error.message}`
-                            })
-                        )
-                        return EMPTY
-                    })
-                )
+            mergeMap((action: fromSpeakers.SpeakersQuery) =>
+                this.speakerService
+                    .getSpeakers(action.page, action.pageSize)
+                    .pipe(
+                        map(
+                            (speakers) =>
+                                new fromSpeakers.SpeakersLoaded(speakers)
+                        ),
+                        catchError((error) => {
+                            this.store.dispatch(
+                                new fromSpeakers.SpeakersError(
+                                    `Error in retrieving Speakers ${error.message}`
+                                )
+                            )
+                            return EMPTY
+                        })
+                    )
             )
         )
     )

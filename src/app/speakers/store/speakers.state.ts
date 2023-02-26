@@ -4,11 +4,11 @@ import { Speaker } from '../model/speaker'
 export interface SpeakersState {
     list: Array<Speaker>
     loading: boolean
-    error: any
+    error?: string
 }
 
 export const SpeakersInitialState: SpeakersState = {
     list: emptySpeakersList,
     loading: true,
-    error: null
+    error: undefined
 }
