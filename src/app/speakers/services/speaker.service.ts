@@ -42,10 +42,8 @@ export class SpeakerService {
                 map(
                     (responce: SpeakerPage): Array<Speaker> => responce.results
                 ),
-                catchError((err: any): Observable<Array<Speaker>> => {
-                    throw new Error(
-                        `Error in retrieving Speakers ${err.message}`
-                    )
+                catchError((): Observable<Array<Speaker>> => {
+                    throw new Error('Error in retrieving Speakers')
                 })
             )
     }

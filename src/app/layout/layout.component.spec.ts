@@ -1,22 +1,22 @@
 import { SharedModule } from '@@shared/shared.module'
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing'
+import { RouterTestingModule } from '@angular/router/testing'
 
-import { ConfirmModalComponent } from './confirm-modal.component'
+import { LayoutComponent } from './layout.component'
 
-describe('ConfirmModalComponent', () => {
-    let component: ConfirmModalComponent
-    let fixture: ComponentFixture<ConfirmModalComponent>
+describe('LayoutComponent', () => {
+    let component: LayoutComponent
+    let fixture: ComponentFixture<LayoutComponent>
 
     beforeEach(waitForAsync(() => {
         void TestBed.configureTestingModule({
-            imports: [SharedModule],
-            declarations: [ConfirmModalComponent],
-            providers: []
+            imports: [SharedModule, RouterTestingModule],
+            declarations: [LayoutComponent]
         }).compileComponents()
     }))
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ConfirmModalComponent)
+        fixture = TestBed.createComponent(LayoutComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
     })

@@ -21,12 +21,4 @@ describe('AppComponent', () => {
         const app = fixture.componentInstance
         expect(app.title).toEqual('code-challenge')
     })
-
-    // it('should render title', () => {
-    //     const fixture = TestBed.createComponent(AppComponent)
-    //     fixture.detectChanges()
-    //     const compiled = fixture.nativeElement
-    //     console.log(compiled)
-    //     expect(compiled.querySelector('.navbar-brand').textContent).toContain('Code Challenge')
-    // })
 })

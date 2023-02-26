@@ -16,7 +16,6 @@ export class SpeakerModalComponent {
     speaker!: Speaker
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: SpeakerModalData) {
-        console.log(data)
         this.speaker = data.speaker
     }
 }

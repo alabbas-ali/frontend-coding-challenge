@@ -42,7 +42,7 @@ export class SpeakersComponent implements OnInit {
     searchText = ''
 
     constructor(
-        public dialog: MatDialog,
+        private dialog: MatDialog,
         private store: Store<SpeakersState>
     ) {}
 

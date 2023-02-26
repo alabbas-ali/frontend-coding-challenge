@@ -1,15 +1,13 @@
-import { TestBed, getTestBed } from '@angular/core/testing'
+import { TestBed } from '@angular/core/testing'
 import {
     HttpClientTestingModule,
     HttpTestingController
 } from '@angular/common/http/testing'
-
 import { SpeakerService } from './speaker.service'
-import { Speaker } from '../model/speaker'
+import { Speaker, SpeakerPage } from '../model/speaker'
 import { emptySpeakersList } from '../model/empty-speakers'
 
 describe('SpeakerService', () => {
-    let injector: TestBed
     let service: SpeakerService
     let httpMock: HttpTestingController
 
@@ -18,10 +16,8 @@ describe('SpeakerService', () => {
             imports: [HttpClientTestingModule],
             providers: [SpeakerService]
         })
-        injector = getTestBed()
-
         service = TestBed.inject(SpeakerService)
-        httpMock = injector.get(HttpTestingController)
+        httpMock = TestBed.inject(HttpTestingController)
     })
 
     afterEach(() => {
@@ -32,18 +28,58 @@ describe('SpeakerService', () => {
         expect(service).toBeTruthy()
     })
 
-    describe('#getSpeakers', () => {
-        it('should return an Observable<Array<Speakers>>', () => {
-            const dummySpeakers: Array<Speaker> = emptySpeakersList
+    it('should return speakers when called', () => {
+        const mockPage: SpeakerPage = {
+            results: emptySpeakersList,
+            info: { seed: 'test', results: 3, page: 1, version: '1.3' }
+        }
 
-            service.getSpeakers(1, 3).subscribe((speakers) => {
-                expect(speakers.length).toBe(3)
-                expect(speakers).toEqual(dummySpeakers)
-            })
-
-            const req = httpMock.expectOne('/api/?page=1&results=3')
-            expect(req.request.method).toBe('GET')
-            req.flush(dummySpeakers)
+        service.getSpeakers().subscribe((speakers: Speaker[]) => {
+            expect(speakers.length).toBe(3)
+            expect(speakers[0].name.first).toBe('Marvin')
+            expect(speakers[0].name.last).toBe('Hanson')
         })
+
+        // eslint-disable-next-line @typescript-eslint/dot-notation
+        const req = httpMock.expectOne(`${service['api']}/?page=0&results=9`)
+        expect(req.request.method).toBe('GET')
+        req.flush(mockPage)
+    })
+
+    it('should return speakers with custom page and results', () => {
+        const mockPage: SpeakerPage = {
+            results: emptySpeakersList,
+            info: { seed: 'test', results: 3, page: 1, version: '1.3' }
+        }
+
+        service.getSpeakers(2, 2).subscribe((speakers: Speaker[]) => {
+            expect(speakers.length).toBe(3)
+            expect(speakers[0].name.first).toBe('Marvin')
+            expect(speakers[0].name.last).toBe('Hanson')
+            expect(speakers[1].name.first).toBe('Marvin')
+            expect(speakers[1].name.last).toBe('Hanson')
+        })
+
+        // eslint-disable-next-line @typescript-eslint/dot-notation
+        const req = httpMock.expectOne(`${service['api']}/?page=2&results=2`)
+        expect(req.request.method).toBe('GET')
+        req.flush(mockPage)
+    })
+
+    it('should handle errors', () => {
+        service.getSpeakers().subscribe(
+            () => {
+                fail('expected an error')
+            },
+            (error: any) => {
+                expect(error).toEqual(new Error('Error in retrieving Speakers'))
+            }
+        )
+
+        // eslint-disable-next-line @typescript-eslint/dot-notation
+        const req = httpMock.expectOne(`${service['api']}/?page=0&results=9`)
+        expect(req.request.method).toEqual('GET')
+
+        req.flush(null, { status: 500, statusText: 'Server error' })
     })
 })

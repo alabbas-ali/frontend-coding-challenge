@@ -1,6 +1,5 @@
 import {
     Component,
-    OnInit,
     Input,
     Output,
     EventEmitter,
@@ -14,13 +13,11 @@ import { Speaker } from '../../model/speaker'
     styleUrls: ['./speaker-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SpeakerCardComponent implements OnInit {
+export class SpeakerCardComponent {
     @Input() speaker!: Speaker
     @Output() view = new EventEmitter<Speaker>()
 
     constructor() {}
-
-    ngOnInit() {}
 
     onView() {
         this.view.emit(this.speaker)

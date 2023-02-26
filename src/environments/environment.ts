@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    API_HOST: 'https://randomuser.me/api/'
+    API_HOST: 'https://randomuser.me/api'
 }
 
 /*
