@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { PageEvent } from '@angular/material/paginator'
+
+import { MatDialog } from '@angular/material/dialog'
+
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 
@@ -13,6 +16,7 @@ import {
 import * as fromSpeakers from '../../store/speakers.actions'
 
 import { SpeakersState } from '../../store/speakers.state'
+import { SpeakerModalComponent } from '../../components/speaker-modal/speaker-modal.component'
 
 @Component({
     selector: 'app-speakers',
@@ -37,7 +41,10 @@ export class SpeakersComponent implements OnInit {
 
     searchText = ''
 
-    constructor(private store: Store<SpeakersState>) {}
+    constructor(
+        public dialog: MatDialog,
+        private store: Store<SpeakersState>
+    ) {}
 
     ngOnInit() {
         this.store.dispatch(
@@ -62,8 +69,10 @@ export class SpeakersComponent implements OnInit {
     }
 
     openViewSpeakerModal(speaker: Speaker) {
-        console.log(speaker)
-        // TODO: Open modal
+        this.dialog.open(SpeakerModalComponent, {
+            minWidth: '50%',
+            data: { speaker }
+        })
     }
 
     onSpeakerView(emplyee: Speaker) {

@@ -1,8 +1,11 @@
-import { Component, ViewChild } from '@angular/core'
-import { NgForm } from '@angular/forms'
-import { Subject } from 'rxjs'
+import { Component, Inject } from '@angular/core'
+import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 import { Speaker } from '../../model/speaker'
+
+export interface SpeakerModalData {
+    speaker: Speaker
+}
 
 @Component({
     selector: 'speaker-modal',
@@ -10,22 +13,10 @@ import { Speaker } from '../../model/speaker'
     styleUrls: ['./speaker-modal.component.scss']
 })
 export class SpeakerModalComponent {
-    @ViewChild('speakerForm', { static: true }) speakerForm!: NgForm
+    speaker!: Speaker
 
-    heading!: string
-    speakerData: Subject<Speaker> = new Subject()
-    speaker: Speaker = {} as Speaker
-
-    constructor() {}
-
-    onSave() {
-        if (this.speakerForm.valid) {
-            this.speakerData.next(this.speaker)
-        } else {
-            const controls = this.speakerForm.controls
-            Object.keys(controls).forEach((controlName) =>
-                controls[controlName].markAsTouched()
-            )
-        }
+    constructor(@Inject(MAT_DIALOG_DATA) public data: SpeakerModalData) {
+        console.log(data)
+        this.speaker = data.speaker
     }
 }

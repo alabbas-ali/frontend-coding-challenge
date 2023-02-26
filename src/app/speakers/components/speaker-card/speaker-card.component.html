@@ -15,22 +15,8 @@
             <strong>{{ speaker.email }}</strong>
         </mat-card-subtitle>
     </mat-card-header>
-    <!--Card image-->
-    <!-- <img
-        mat-card-image
-        src="{{ speaker.picture.large }}"
-        alt="{{ speaker.name.title }} 
-        {{ speaker.name.first }} 
-        {{ speaker.name.last }}"
-    /> -->
 
-    <!--Card content-->
-    <mat-card-content>
-        <div>
-            <p>Location: {{ speaker.location.city }}</p>
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions align="end">
         <button mat-button color="primary" (click)="onView()">
             View Details
         </button>
