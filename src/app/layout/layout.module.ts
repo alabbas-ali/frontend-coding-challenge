@@ -6,11 +6,13 @@ import { SharedModule } from '@@shared/shared.module'
 import { AppHeaderComponent } from './header/header.component'
 import { AppFooterComponent } from './footer/footer.component'
 import { LayoutComponent } from './layout.component'
+import { RouterModule } from '@angular/router'
 
 @NgModule({
     imports: [
         CommonModule, //
-        SharedModule
+        SharedModule,
+        RouterModule
     ],
     declarations: [
         AppHeaderComponent, //

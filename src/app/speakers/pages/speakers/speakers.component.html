@@ -1,11 +1,12 @@
 <app-layout>
     <section class="container mx-auto">
+        <!--Section heading-->
+        <h1>Speakers</h1>
+    </section>
+    <section class="container mx-auto">
         <div class="loading" *ngIf="loading$ | async">
             <span class="loader"></span>
         </div>
-
-        <!--Section heading-->
-        <h3>Speakers</h3>
 
         <div class="flex">
             <mat-form-field>

@@ -3,10 +3,11 @@
     <!-- Navbar brand -->
     <mat-toolbar-row>
         <span>
-            <a class="navbar-brand" href="#"> Code Challenge </a>
+            <a class="navbar-brand" href="#">Frontend Code Challenge </a>
         </span>
         <a mat-button routerLinkActive="active" routerLink="/"> Home </a>
-        <a mat-button routerLinkActive="active" routerLink="/about"> About </a>
-        <a mat-button routerLinkActive="active" routerLink="#"> Pricing </a>
+        <a mat-button routerLinkActive="active" [routerLink]="['/about']">
+            About
+        </a>
     </mat-toolbar-row>
 </mat-toolbar>
